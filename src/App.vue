@@ -1,48 +1,39 @@
 <template>
-  <v-app>
-    <v-navigation-drawer v-model="sidebar" app>
-      <v-list>
-        <v-list-tile
-            v-for="item in menuItems"
-            :key="item.title"
-            :to="item.path">
-          <v-list-tile-action>
+  <v-app id="inspire">
+    <v-navigation-drawer
+        v-model="sidebar"
+        app
+    >
+      <v-list dense>
+        <v-list-item
+          v-for="item in menuItems"
+          :key="item.title"
+          :to="item.path">
+          <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>{{ item.title }}</v-list-tile-content>
-        </v-list-tile>
+          </v-list-item-action>
+          <v-list-item-content>{{ item.title }}</v-list-item-content>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
-    <v-toolbar app>
-      <span class="hidden-sm-and-up">
-        <v-toolbar-side-icon @click="sidebar = !sidebar">
-        </v-toolbar-side-icon>
-      </span>
-      <v-toolbar-title>
-        <router-link to="/" tag="span" style="cursor: pointer">
-          {{ appTitle }}
-        </router-link>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-toolbar-items class="hidden-xs-only">
-        <v-btn
-            flat
-            v-for="item in menuItems"
-            :key="item.title"
-            :to="item.path">
-          <v-icon left dark>{{ item.icon }}</v-icon>
-          {{ item.title }}
-        </v-btn>
-      </v-toolbar-items>
-    </v-toolbar>
+    <v-app-bar
+        app
+        dark
+    >
+      <v-app-bar-nav-icon @click.stop="sidebar = !sidebar"></v-app-bar-nav-icon>
+      <v-toolbar-title>Application</v-toolbar-title>
+    </v-app-bar>
 
     <v-content>
       <router-view></router-view>
     </v-content>
-
+    <v-footer
+        app
+    >
+      <span>&copy; {{ new Date().getFullYear() }}</span>
+    </v-footer>
   </v-app>
-
 </template>
 
 <script>
@@ -53,9 +44,9 @@
         appTitle: 'ADEL',
         sidebar: false,
         menuItems: [
-          { title: 'Home', path: '/', icon: 'dashboard' },
+          { title: 'Home', path: '/', icon: 'home' },
           { title: 'Demo', path: '/demo', icon: 'dashboard' },
-          { title: 'About', path: '/about', icon: 'question_answer' }
+          { title: 'About', path: '/about', icon: 'mdi-contact-mail' }
         ]
       }
     },
